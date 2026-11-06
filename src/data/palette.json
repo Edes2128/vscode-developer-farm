@@ -1,0 +1,27 @@
+{
+  "brand": {
+    "forestGreen": "#527B50",
+    "sageGreen": "#8FAF69",
+    "wheatGold": "#D9B76C",
+    "terracotta": "#B97855",
+    "riverBlue": "#668FA1"
+  },
+  "derived": {
+    "ink": "#26352b",
+    "inkWarm": "#3a2a22",
+    "deepForest": "#1b2a1f",
+    "nightForest": "#121c15",
+    "parchment": "#F1E3BC",
+    "parchmentShade": "#D9C48F",
+    "woodLight": "#A67C52",
+    "wood": "#7A5738",
+    "woodDark": "#4E3624",
+    "stone": "#8C877B",
+    "cream": "#FFF6DC",
+    "berry": "#C2455A",
+    "sky": "#9CC4D4",
+    "blossom": "#E8A7B6",
+    "sun": "#F2D16B",
+    "violet": "#8E7BB5"
+  }
+}

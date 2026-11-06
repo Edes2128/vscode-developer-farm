@@ -1,0 +1,103 @@
+{
+  "name": "developer-farm",
+  "displayName": "Developer Farm",
+  "description": "A cozy little world of your own. A single-player pixel-art farming and exploration game inside VS Code. Offline, no accounts, no tracking.",
+  "version": "0.8.0",
+  "private": true,
+  "publisher": "thesulce",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#1b2a1f",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.90.0",
+    "node": ">=20"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "game",
+    "farming",
+    "pixel art",
+    "cozy"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "extensionKind": [
+    "ui"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "developerFarm",
+          "title": "Developer Farm",
+          "icon": "media/farm.svg"
+        }
+      ]
+    },
+    "views": {
+      "developerFarm": [
+        {
+          "id": "developerFarm.home",
+          "name": "Developer Farm",
+          "icon": "media/farm.svg"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "developerFarm.home",
+        "contents": "A cozy little world of your own.\n\nYour farm is waiting. It plays in its own editor tab, saves on this computer, and never needs the internet.\n[Open Developer Farm](command:developerFarm.open)"
+      }
+    ],
+    "commands": [
+      {
+        "command": "developerFarm.open",
+        "title": "Open Farm",
+        "category": "Developer Farm"
+      }
+    ]
+  },
+  "scripts": {
+    "assets": "node scripts/build-assets.mjs",
+    "build": "npm run assets && npm run build:extension && npm run build:webview",
+    "build:extension": "node scripts/build-extension.mjs",
+    "build:webview": "vite build",
+    "dev": "node scripts/dev.mjs",
+    "dev:extension": "node scripts/build-extension.mjs --watch",
+    "dev:webview": "vite",
+    "typecheck": "tsc -p tsconfig.extension.json --noEmit && tsc -p tsconfig.webview.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "npm run build && node scripts/build-extension.mjs --tests && node out/test/runTest.js",
+    "vscode:prepublish": "npm run assets && node scripts/build-extension.mjs --production && vite build",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@fontsource/pixelify-sans": "^5.3.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/vscode": "~1.90.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^4.1.0",
+    "esbuild": "^0.28.2",
+    "pixi.js": "^8.22.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0"
+  }
+}

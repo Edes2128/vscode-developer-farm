@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": ["node", "vscode"]
+  },
+  "include": [
+    "src/extension",
+    "src/shared",
+    "src/engine",
+    "src/data",
+    "test",
+    "vite.config.mts",
+    "vitest.config.mts"
+  ]
+}

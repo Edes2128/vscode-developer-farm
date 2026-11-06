@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "developer-farm-webview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:webview"],
+      "port": 5174
+    }
+  ]
+}

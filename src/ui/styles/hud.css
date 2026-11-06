@@ -1,0 +1,1173 @@
+/* Layout of the interface over the game. Everything is positioned off the viewport edges. */
+
+:root {
+  --inset: calc(9px * var(--px));
+}
+
+.df-hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.df-hud-hidden {
+  opacity: 0;
+}
+
+.df-hud-hidden * {
+  pointer-events: none !important;
+}
+
+.df-frame {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: transparent;
+  border-width: calc(7px * var(--px));
+  border-image: url('../../assets/generated/ui/frame.png') 7 / calc(7px * var(--px)) / 0 stretch;
+  image-rendering: pixelated;
+}
+
+/* ------------------------------------------------------------------ location banner */
+
+.df-banner {
+  position: absolute;
+  top: var(--inset);
+  left: var(--inset);
+  display: flex;
+  flex-direction: column;
+  padding: calc(1px * var(--px)) calc(3px * var(--px));
+  animation: df-banner 4.6s ease both;
+}
+
+.df-banner-region {
+  font-size: 0.8em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-wheat);
+}
+
+.df-banner-name {
+  font-weight: 700;
+  font-size: 1.25em;
+}
+
+@keyframes df-banner {
+  0% {
+    opacity: 0;
+    transform: translateY(calc(-4px * var(--px)));
+  }
+  8%,
+  80% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ prompt, dialog, hints, toast */
+
+.df-prompt {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--inset) + 24px * var(--hb) + 6px * var(--px));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: calc(2px * var(--px));
+  padding: 0 calc(2px * var(--px));
+  white-space: nowrap;
+}
+
+.df-dialog {
+  position: fixed;
+  left: 50%;
+  bottom: var(--inset);
+  transform: translateX(-50%);
+  width: min(calc(100vw - 2 * var(--inset)), 560px);
+  padding: 0 calc(2px * var(--px));
+  cursor: pointer;
+  pointer-events: auto;
+  animation: df-rise 0.18s ease-out both;
+}
+
+.df-dialog-title {
+  font-weight: 700;
+  font-size: 0.8em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-terracotta);
+}
+
+.df-dialog-text {
+  margin: calc(1px * var(--px)) 0;
+  min-height: 2.7em;
+  font-size: 1.1em;
+}
+
+.df-dialog-more {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: calc(1.5px * var(--px));
+  font-size: 0.85em;
+}
+
+@keyframes df-rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(3px * var(--px)));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.df-hints {
+  position: absolute;
+  top: calc(var(--inset) + 28px * var(--px));
+  left: var(--inset);
+  width: max-content;
+  min-width: calc(84px * var(--px));
+  max-width: calc(100vw - 2 * var(--inset));
+  /* Never reach down over the hotbar: scroll instead. */
+  max-height: calc(100vh - var(--inset) * 2 - 28px * var(--px) - 30px * var(--hb) - 8px * var(--px));
+  overflow-y: auto;
+  pointer-events: auto;
+  padding: 0 calc(1px * var(--px));
+  font-size: 0.9em;
+}
+
+.df-hints-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: calc(0.5px * var(--px));
+}
+
+.df-hints-title {
+  font-weight: 700;
+}
+
+.df-hints-close {
+  border: 0;
+  background: none;
+  padding: 0 calc(1px * var(--px));
+  color: var(--c-terracotta);
+  font: 700 1.5em / 1 var(--font);
+  cursor: pointer;
+}
+
+.df-hints-close:hover {
+  color: var(--c-berry);
+}
+
+.df-hints dl {
+  margin: 0;
+}
+
+.df-hints-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(1.5px * var(--px));
+  padding: calc(0.3px * var(--px)) 0;
+}
+
+.df-hints-row dt,
+.df-hints-row dd {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.df-toast {
+  position: absolute;
+  right: var(--inset);
+  bottom: var(--inset);
+  padding: 0 calc(2px * var(--px));
+  animation: df-toast 2.6s ease both;
+}
+
+.df-toast-warning {
+  animation: none;
+  max-width: calc(110px * var(--px));
+  color: var(--c-sun);
+}
+
+@keyframes df-toast {
+  0% {
+    opacity: 0;
+  }
+  10%,
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ notice, status, focus, debug */
+
+.df-notice {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(calc(100vw - 2 * var(--inset)), 460px);
+  text-align: center;
+  pointer-events: auto;
+  padding: 0 calc(2px * var(--px));
+}
+
+.df-focus {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: rgba(18, 28, 21, 0.55);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.df-focus > span {
+  padding: 0 calc(3px * var(--px));
+  font-weight: 700;
+}
+
+.df-status {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-deep-forest);
+  pointer-events: auto;
+}
+
+.df-status-box {
+  width: min(calc(100vw - 2 * var(--inset)), 460px);
+  text-align: center;
+  padding: 0 calc(2px * var(--px));
+}
+
+.df-status-title {
+  font-weight: 700;
+  font-size: 1.2em;
+}
+
+.df-status-text {
+  margin: calc(1px * var(--px)) 0 0;
+  font-size: 0.9em;
+  user-select: text;
+  overflow-wrap: anywhere;
+}
+
+.df-debug {
+  position: fixed;
+  top: calc(var(--inset) + 18px * var(--px));
+  left: var(--inset);
+  margin: 0;
+  padding: 6px 8px;
+  background: rgba(10, 16, 12, 0.72);
+  color: #cfe3c0;
+  font: 12px / 1.4 ui-monospace, Menlo, Consolas, monospace;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ pause menu */
+
+.df-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 28, 21, 0.6);
+  pointer-events: auto;
+}
+
+.df-menu {
+  width: min(calc(100vw - 2 * var(--inset)), 400px);
+  /* A long menu (sound and comfort settings) scrolls in a short window instead of running off the screen. */
+  max-height: calc(100vh - 2 * var(--inset));
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: calc(2px * var(--px));
+  padding: calc(1px * var(--px)) calc(2px * var(--px));
+}
+
+.df-menu-title {
+  margin: 0;
+  text-align: center;
+  font: 700 1.5em / 1.2 var(--font);
+  color: var(--c-wheat);
+}
+
+.df-menu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(2px * var(--px));
+}
+
+.df-stepper {
+  display: flex;
+  align-items: center;
+  gap: calc(1px * var(--px));
+}
+
+.df-stepper-value {
+  min-width: calc(24px * var(--px));
+  text-align: center;
+}
+
+.df-menu-foot {
+  margin: 0;
+  text-align: center;
+  font-size: 0.8em;
+  color: var(--c-wheat);
+}
+
+/* Calm motion (the computer's setting, or the player's choice in the pause menu): the interface holds still too. */
+html.df-calm .df-banner,
+html.df-calm .df-toast,
+html.df-calm .df-dialog {
+  animation-duration: 0.01s;
+}
+
+html.df-calm .df-hud {
+  transition: none;
+}
+
+/* ------------------------------------------------------------------ hotbar */
+
+.df-hotbar-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: var(--inset);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(0.5px * var(--px));
+  max-width: calc(100vw - 2 * var(--inset));
+}
+
+.df-hotbar-name {
+  min-height: 1.3em;
+  font-weight: 700;
+  font-size: 0.9em;
+  text-shadow: 1px 1px 0 var(--c-night-forest), -1px 1px 0 var(--c-night-forest);
+}
+
+.df-hotbar {
+  display: flex;
+  gap: calc(0.5px * var(--hb));
+  pointer-events: auto;
+}
+
+.df-slot {
+  position: relative;
+  box-sizing: border-box;
+  width: calc(22px * var(--hb));
+  height: calc(22px * var(--hb));
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-style: solid;
+  border-color: transparent;
+  border-width: calc(3px * var(--hb));
+  border-image: url('../../assets/generated/ui/slot.png') 3 fill / calc(3px * var(--hb)) / 0 stretch;
+  image-rendering: pixelated;
+  background: none;
+  color: var(--c-cream);
+  font: 700 calc(4.4px * var(--hb)) / 1 var(--font);
+  cursor: pointer;
+}
+
+.df-slot-selected {
+  border-image-source: url('../../assets/generated/ui/slot-selected.png');
+  transform: translateY(calc(-1px * var(--hb)));
+}
+
+.df-slot:focus-visible {
+  outline: 2px solid var(--c-sun);
+  outline-offset: 1px;
+}
+
+.df-icon {
+  display: block;
+  flex: none;
+}
+
+.df-slot-key {
+  position: absolute;
+  top: calc(-2.4px * var(--hb));
+  left: calc(-1px * var(--hb));
+  opacity: 0.75;
+  text-shadow: 1px 1px 0 var(--c-night-forest);
+}
+
+.df-slot-count {
+  position: absolute;
+  right: calc(-2px * var(--hb));
+  bottom: calc(-2.6px * var(--hb));
+  font-size: calc(5.2px * var(--hb));
+  text-shadow: 1px 1px 0 var(--c-night-forest), -1px 0 0 var(--c-night-forest), 0 1px 0 var(--c-night-forest);
+}
+
+.df-slot-star {
+  position: absolute;
+  top: calc(-2.4px * var(--hb));
+  right: calc(-2px * var(--hb));
+  color: var(--c-sun);
+  font-size: calc(5px * var(--hb));
+  text-shadow: 1px 1px 0 var(--c-night-forest);
+}
+
+.df-slot-meter {
+  position: absolute;
+  left: calc(1px * var(--hb));
+  right: calc(1px * var(--hb));
+  bottom: calc(-2px * var(--hb));
+  height: calc(1.6px * var(--hb));
+  background: var(--c-night-forest);
+}
+
+.df-slot-meter-fill {
+  display: block;
+  height: 100%;
+  background: var(--c-river);
+}
+
+/* ------------------------------------------------------------------ clock and money */
+
+.df-status-panel {
+  position: absolute;
+  top: var(--inset);
+  right: var(--inset);
+  min-width: calc(40px * var(--px));
+  padding: 0 calc(1.5px * var(--px));
+  text-align: right;
+  line-height: 1.25;
+}
+
+.df-status-date {
+  font-weight: 700;
+  color: var(--c-sage);
+}
+
+.df-season-summer .df-status-date {
+  color: var(--c-sun);
+}
+
+.df-season-autumn .df-status-date {
+  color: var(--c-terracotta);
+}
+
+.df-season-winter .df-status-date {
+  color: #a9cbd9;
+}
+
+.df-status-weekday {
+  font-weight: 400;
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+
+.df-status-time {
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+.df-status-money {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: calc(1px * var(--px));
+  color: var(--c-wheat);
+  font-weight: 700;
+}
+
+.df-coin {
+  display: inline-block;
+  flex: none;
+}
+
+/* ------------------------------------------------------------------ floating hint */
+
+.df-hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--inset) + 24px * var(--hb) + 6px * var(--px));
+  transform: translateX(-50%);
+  padding: 0 calc(2px * var(--px));
+  white-space: nowrap;
+  animation: df-hint 2.8s ease both;
+}
+
+.df-hint-warn {
+  color: #7a2236;
+}
+
+@keyframes df-hint {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, calc(3px * var(--px)));
+  }
+  8%,
+  80% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, calc(-2px * var(--px)));
+  }
+}
+
+/* ------------------------------------------------------------------ dialog choices */
+
+.df-options {
+  margin: calc(1px * var(--px)) 0;
+  padding: 0;
+  list-style: none;
+  /* A long menu (the kitchen has a dozen dishes) scrolls instead of running off the window. */
+  max-height: min(40vh, calc(110px * var(--px)));
+  overflow-y: auto;
+}
+
+.df-option {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: calc(0.4px * var(--px)) calc(1.5px * var(--px));
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.df-option::before {
+  content: '  ';
+  white-space: pre;
+}
+
+.df-option-selected {
+  background: rgba(185, 120, 85, 0.28);
+  font-weight: 700;
+}
+
+.df-option-selected::before {
+  content: '▸ ';
+  color: var(--c-terracotta);
+}
+
+.df-option:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.df-dialog-note {
+  margin: 0 0 calc(1px * var(--px));
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--c-forest);
+}
+
+/* ------------------------------------------------------------------ the morning after */
+
+.df-fade {
+  position: fixed;
+  inset: 0;
+  background: #0b120d;
+  pointer-events: none;
+  animation: df-fade-in 1.8s ease-out both;
+}
+
+@keyframes df-fade-in {
+  0% {
+    opacity: 1;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.df-summary-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 28, 21, 0.45);
+  pointer-events: auto;
+  animation: df-summary-in 0.5s ease 0.5s both;
+}
+
+@keyframes df-summary-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.df-summary {
+  width: min(calc(100vw - 2 * var(--inset)), 440px);
+  padding: 0 calc(2px * var(--px));
+}
+
+.df-summary-date {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: var(--c-terracotta);
+}
+
+.df-summary-intro,
+.df-summary-crops {
+  margin: calc(1px * var(--px)) 0;
+}
+
+.df-summary-list {
+  margin: calc(1px * var(--px)) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.df-summary-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: calc(2px * var(--px));
+  padding: calc(0.3px * var(--px)) 0;
+  border-bottom: 1px dashed rgba(122, 87, 56, 0.4);
+}
+
+.df-summary-total {
+  font-weight: 700;
+  color: var(--c-forest);
+  border-bottom: 0;
+}
+
+/* Calm motion (the computer's setting, or the player's choice in the pause menu): the interface holds still too. */
+html.df-calm .df-hint,
+html.df-calm .df-fade,
+html.df-calm .df-fade-quick,
+html.df-calm .df-summary-backdrop {
+  animation-duration: 0.01s;
+  animation-delay: 0s;
+}
+
+/* ------------------------------------------------------------------ villagers: portrait and hearts */
+
+.df-dialog-body {
+  display: block;
+}
+
+.df-dialog-spoken {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(2px * var(--px));
+}
+
+.df-dialog-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.df-dialog-role {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--c-wood);
+}
+
+.df-portrait {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(0.5px * var(--px));
+  padding-top: calc(1px * var(--px));
+}
+
+.df-portrait-art {
+  flex: none;
+}
+
+.df-hearts {
+  display: flex;
+  max-width: calc(16px * var(--px));
+  flex-wrap: wrap;
+  justify-content: center;
+  line-height: 1;
+  font-size: 0.7em;
+}
+
+.df-heart {
+  color: rgba(122, 87, 56, 0.35);
+}
+
+.df-heart-full {
+  color: var(--c-berry);
+}
+
+/* ------------------------------------------------------------------ journal and quest tracker */
+
+.df-journal {
+  display: flex;
+  flex-direction: column;
+  width: min(calc(100vw - 2 * var(--inset)), 520px);
+  max-height: calc(100vh - 2 * var(--inset));
+  padding: 0 calc(2px * var(--px));
+}
+
+.df-journal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.df-journal-title {
+  margin: calc(1px * var(--px)) 0;
+  font-size: 1.4em;
+  color: var(--c-terracotta);
+}
+
+.df-journal-scroll {
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: calc(1px * var(--px));
+}
+
+.df-journal-section {
+  margin: calc(1.5px * var(--px)) 0 calc(0.5px * var(--px));
+  font-size: 0.8em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-wood);
+}
+
+.df-journal-empty {
+  margin: calc(2px * var(--px)) 0;
+}
+
+.df-quest {
+  margin: 0 0 calc(1.5px * var(--px));
+  padding: calc(1px * var(--px)) calc(1.5px * var(--px));
+  border-left: calc(1px * var(--px)) solid var(--c-sage);
+  background: rgba(122, 87, 56, 0.1);
+}
+
+.df-quest-ready {
+  border-left-color: var(--c-sun);
+  background: rgba(242, 209, 107, 0.22);
+}
+
+.df-quest-done {
+  border-left-color: var(--c-wood);
+  opacity: 0.75;
+}
+
+.df-quest-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: calc(2px * var(--px));
+}
+
+.df-quest-title {
+  margin: 0;
+  font-size: 1.05em;
+}
+
+.df-quest-tag {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--c-forest);
+  white-space: nowrap;
+}
+
+.df-quest-summary {
+  margin: calc(0.5px * var(--px)) 0;
+}
+
+.df-quest-goals {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.df-quest-goal-done {
+  color: var(--c-forest);
+}
+
+.df-quest-reward {
+  margin: calc(0.5px * var(--px)) 0 0;
+  font-size: 0.85em;
+  color: var(--c-wood);
+}
+
+.df-tracker {
+  position: absolute;
+  top: calc(var(--inset) + 49px * var(--px));
+  right: var(--inset);
+  display: flex;
+  align-items: center;
+  gap: calc(1.5px * var(--px));
+  padding: 0 calc(1.5px * var(--px));
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+.df-tracker-ready {
+  font-weight: 700;
+}
+
+.df-fade-quick {
+  animation: df-travel 0.55s ease-out both;
+}
+
+@keyframes df-travel {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Calm motion (the computer's setting, or the player's choice in the pause menu): the interface holds still too. */
+html.df-calm .df-fade-quick {
+  animation-duration: 0.01s;
+  animation-delay: 0s;
+}
+
+.df-journal .df-menu-foot {
+  margin: calc(1px * var(--px)) 0;
+  color: var(--c-wood);
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------ journal tabs and the collection page */
+
+.df-tabs {
+  display: flex;
+  gap: calc(0.5px * var(--px));
+}
+
+.df-tab {
+  padding: calc(0.4px * var(--px)) calc(1.5px * var(--px));
+  border: 0;
+  background: rgba(122, 87, 56, 0.15);
+  color: var(--c-ink);
+  font: inherit;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.df-tab-on {
+  background: rgba(185, 120, 85, 0.35);
+  font-weight: 700;
+}
+
+.df-collection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(34px * var(--px)), 1fr));
+  gap: calc(1px * var(--px));
+  margin: 0 0 calc(1px * var(--px));
+  padding: 0;
+  list-style: none;
+}
+
+.df-collected {
+  display: flex;
+  align-items: center;
+  gap: calc(1px * var(--px));
+  padding: calc(0.5px * var(--px)) calc(1px * var(--px));
+  background: rgba(122, 87, 56, 0.12);
+}
+
+.df-collected-unknown {
+  opacity: 0.45;
+  filter: grayscale(1) brightness(0.4);
+}
+
+.df-collected-icon {
+  flex: none;
+}
+
+.df-collected-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9em;
+}
+
+.df-collected-count {
+  font-weight: 700;
+  color: var(--c-forest);
+  font-size: 0.85em;
+}
+
+.df-collected-star {
+  color: var(--c-sun);
+  font-size: 0.85em;
+  text-shadow: 0 0 1px var(--c-wood-dark);
+}
+
+
+/* ------------------------------------------------------------------ weather, festivals and the calendar (Phase 6) */
+
+.df-status-weather {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: calc(1px * var(--px));
+  font-size: 0.85em;
+  opacity: 0.95;
+}
+
+.df-weather-icon {
+  display: inline-block;
+  flex: none;
+}
+
+.df-weather-next {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(0.5px * var(--px));
+  font-size: 0.8em;
+  opacity: 0.75;
+}
+
+.df-festival {
+  position: absolute;
+  top: var(--inset);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: calc(1.5px * var(--px));
+  /* Stay clear of the clock panel on the right and the location banner on the left. */
+  max-width: calc(100vw - 2 * (52px * var(--px) + var(--inset)));
+  padding: calc(0.5px * var(--px)) calc(3px * var(--px));
+  font-size: 0.85em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.df-festival-mark {
+  color: var(--c-terracotta);
+}
+
+.df-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: calc(0.5px * var(--px));
+  margin: calc(1px * var(--px)) 0;
+  max-width: calc(130px * var(--px));
+}
+
+.df-cal-head {
+  text-align: center;
+  font-size: 0.75em;
+  opacity: 0.7;
+}
+
+.df-cal-day {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(12px * var(--px));
+  padding: calc(0.5px * var(--px));
+  border: 1px solid rgba(60, 40, 20, 0.25);
+  border-radius: 2px;
+  font-size: 0.8em;
+}
+
+.df-cal-market {
+  background: rgba(168, 128, 64, 0.22);
+}
+
+.df-cal-festival {
+  background: rgba(196, 98, 58, 0.22);
+}
+
+.df-cal-today {
+  outline: 2px solid var(--c-terracotta);
+  outline-offset: -1px;
+  font-weight: 700;
+}
+
+.df-cal-marks {
+  font-size: 0.8em;
+  line-height: 1;
+  color: var(--c-terracotta);
+}
+
+.df-agenda {
+  margin: 0 0 calc(2px * var(--px));
+  padding: 0;
+  list-style: none;
+  font-size: 0.9em;
+}
+
+.df-agenda li {
+  padding: calc(0.5px * var(--px)) 0;
+}
+
+.df-agenda-in {
+  opacity: 0.7;
+  font-size: 0.85em;
+}
+
+/* ------------------------------------------------------------------ the bestiary (Phase 7) */
+
+.df-bestiary {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: calc(1.5px * var(--px));
+}
+
+.df-creature {
+  display: flex;
+  gap: calc(2px * var(--px));
+  align-items: flex-start;
+  padding: calc(1px * var(--px));
+  border: 1px solid rgba(60, 40, 20, 0.25);
+  border-radius: 2px;
+}
+
+.df-creature-picture {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(16px * 3);
+  height: calc(16px * 3);
+  font-size: 1.6em;
+  opacity: 0.9;
+}
+
+.df-creature-unknown {
+  opacity: 0.6;
+}
+
+.df-creature-text {
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.5px * var(--px));
+  font-size: 0.9em;
+}
+
+.df-creature-friend {
+  color: var(--c-terracotta);
+  font-weight: 400;
+}
+
+.df-creature-where {
+  opacity: 0.75;
+  font-size: 0.9em;
+}
+
+/* ------------------------------------------------------------------ sound and comfort (Phase 8) */
+
+.df-menu-section {
+  margin: calc(2px * var(--px)) 0 0;
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-wheat);
+}
+
+.df-slider {
+  gap: calc(1.5px * var(--px));
+}
+
+.df-slider input[type='range'] {
+  flex: 1;
+  min-width: calc(40px * var(--px));
+  accent-color: var(--c-wheat);
+  cursor: pointer;
+}
+
+.df-slider input[type='range']:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.df-slider-value {
+  min-width: 2.2em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Bigger text: everything in the interface is sized in em from this. */
+html.df-large-text {
+  --text: 22px;
+}
+
+@media (max-width: 700px) {
+  html.df-large-text {
+    --text: 19px;
+  }
+}
+
+/* A starker interface: black ink on the parchment, white on the wood, stronger edges, no soft text shadows. */
+html.df-high-contrast {
+  --c-ink: #000000;
+  --c-ink-strong: #000000;
+  --c-cream: #ffffff;
+  --c-wheat: #ffe28a;
+  --c-sage: #bfe58c;
+}
+
+html.df-high-contrast .df-hud,
+html.df-high-contrast .df-menu,
+html.df-high-contrast .df-journal,
+html.df-high-contrast .df-summary,
+html.df-high-contrast .df-dialog {
+  text-shadow: none;
+}
+
+html.df-high-contrast .df-panel-wood,
+html.df-high-contrast .df-panel-parchment {
+  filter: contrast(1.3);
+}
+
+/* A ring that shows on parchment and on wood alike: black inside, white outside. */
+html.df-high-contrast .df-button:focus-visible,
+html.df-high-contrast input:focus-visible,
+html.df-high-contrast [role='tab']:focus-visible {
+  outline: 3px solid #000000;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 5px #ffffff;
+}

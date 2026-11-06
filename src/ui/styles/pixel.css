@@ -1,0 +1,176 @@
+/*
+ * Developer Farm look: dark forest-green framing, wooden panels, golden parchment, pixel icons.
+ * The panel images are 9-slice PNGs made by the art pipeline (scripts/build-assets.mjs); here they are
+ * stretched with border-image at a whole-number scale (--px) so the pixels stay square.
+ */
+
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('@fontsource/pixelify-sans/files/pixelify-sans-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('@fontsource/pixelify-sans/files/pixelify-sans-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  /* Brand palette (src/data/palette.json). */
+  --c-forest: #527b50;
+  --c-sage: #8faf69;
+  --c-wheat: #d9b76c;
+  --c-terracotta: #b97855;
+  --c-river: #668fa1;
+
+  --c-deep-forest: #1b2a1f;
+  --c-night-forest: #121c15;
+  --c-parchment: #f1e3bc;
+  --c-cream: #fff6dc;
+  --c-wood: #7a5738;
+  --c-wood-dark: #4e3624;
+  --c-ink: #3a2a22;
+  --c-ink-strong: #26180f;
+  --c-sun: #f2d16b;
+  --c-berry: #c2455a;
+
+  /* One art pixel on screen, in CSS pixels. Whole numbers only, or the borders blur. */
+  --px: 3;
+  /* One art pixel on the hotbar and its icons. Smaller than --px so twelve slots always fit across the window. */
+  --hb: 2;
+  --text: 17px;
+  --font: 'Pixelify Sans', 'Trebuchet MS', system-ui, sans-serif;
+}
+
+@media (min-width: 960px) {
+  :root {
+    --hb: 3;
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --px: 2;
+    --text: 15px;
+  }
+}
+
+@media (max-width: 579px) {
+  :root {
+    --hb: 1;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--c-deep-forest);
+  color: var(--c-cream);
+  font: 400 var(--text) / 1.35 var(--font);
+  -webkit-font-smoothing: none;
+  user-select: none;
+}
+
+#game {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+#ui {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ panels */
+
+.df-panel-wood,
+.df-panel-parchment {
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: transparent;
+  border-width: calc(8px * var(--px));
+  background: none;
+  image-rendering: pixelated;
+}
+
+.df-panel-wood {
+  border-image: url('../../assets/generated/ui/panel-wood.png') 8 fill / calc(8px * var(--px)) / 0 stretch;
+  color: var(--c-cream);
+}
+
+.df-panel-parchment {
+  border-image: url('../../assets/generated/ui/panel-parchment.png') 8 fill / calc(8px * var(--px)) / 0 stretch;
+  color: var(--c-ink);
+}
+
+/* ------------------------------------------------------------------ buttons and keys */
+
+.df-button {
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: transparent;
+  border-width: calc(5px * var(--px));
+  border-image: url('../../assets/generated/ui/button.png') 5 fill / calc(5px * var(--px)) / 0 stretch;
+  image-rendering: pixelated;
+  background: none;
+  padding: 0 calc(3px * var(--px));
+  font: 700 var(--text) / 1.2 var(--font);
+  color: var(--c-ink-strong);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.df-button:hover:not(:disabled) {
+  border-image-source: url('../../assets/generated/ui/button-hover.png');
+}
+
+.df-button:active:not(:disabled),
+.df-button[aria-pressed='true'] {
+  border-image-source: url('../../assets/generated/ui/button-down.png');
+  color: var(--c-cream);
+}
+
+.df-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.df-button:focus-visible {
+  outline: 2px solid var(--c-sun);
+  outline-offset: 2px;
+}
+
+.df-button-wide {
+  width: 100%;
+}
+
+.df-button-small {
+  padding: 0 calc(1.5px * var(--px));
+  min-width: calc(8px * var(--px));
+}
+
+.df-key {
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: calc(8px * var(--px));
+  border-style: solid;
+  border-color: transparent;
+  border-width: calc(4px * var(--px));
+  border-image: url('../../assets/generated/ui/keycap.png') 4 fill / calc(4px * var(--px)) / 0 stretch;
+  image-rendering: pixelated;
+  padding: 0 calc(1px * var(--px));
+  font: 700 0.82em / 1.1 var(--font);
+  color: var(--c-ink-strong);
+  text-align: center;
+  white-space: nowrap;
+}

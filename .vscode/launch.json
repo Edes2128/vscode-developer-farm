@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "preLaunchTask": "developer-farm: build"
+    },
+    {
+      "name": "Run Extension (Vite HMR)",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+      "env": { "DEVELOPER_FARM_DEV_SERVER_URL": "http://localhost:5174" },
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "preLaunchTask": "developer-farm: dev"
+    }
+  ]
+}

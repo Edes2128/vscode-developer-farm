@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "types": ["vite/client"]
+  },
+  "include": [
+    "src/webview",
+    "src/rendering",
+    "src/ui",
+    "src/shared",
+    "src/engine",
+    "src/data",
+    "src/assets"
+  ]
+}
