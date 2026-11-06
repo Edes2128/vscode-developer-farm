@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.1 — Listing
+
+- The Marketplace page now shows only what a player needs; the developer commands moved out of the README into `DEVELOPING.md`, which stays in the source folder.
+
 ## 0.8.0 — Sound and polish
 
 - **Sound.** Footsteps that change with what is underfoot, the thud of the hoe, water, a coin, a door, a bite and a catch, a lullaby when the day ends, thunder, a chime when you discover a creature, a fanfare for a prize; a soft background that follows the weather, the season, the hour and the place (breeze, rain, a storm, snow's hush, crickets, water, a hum indoors, a cave's drone); and a slow tune for each season that plays now and then. All of it is made as you play, with nothing downloaded or stored. It starts after your first key press, stops when the window is not in front, and has volume sliders and a mute in the pause menu.

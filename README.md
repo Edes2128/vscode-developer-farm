@@ -5,7 +5,7 @@
 A single-player pixel-art farming and exploration game that lives in an editor tab of VS Code. Till your field, plant, water,
 sleep, and pick what grew; sell it, get to know the people of the valley, and raise a few hens. It is early: this is **version 0.8,
 sound and polish**. The farm, the village with its shop and cottages, the river and the wood, seven villagers, a coop, fishing, an old mine, cooking and a workbench, furniture, a greenhouse, buried artifacts, a museum,
-seventeen quests, weather, four festivals, a notice board, a Sunday market, two more regions (Windcrest Heights and Marlow Marsh), rare creatures to befriend, sprinklers, fertilizer and a flower that grows only in the rain are in; sound that follows the weather and the hour, text size, contrast and calm-motion options, and a balance pass are the last of the roadmap's eight phases (see `DEVELOPMENT_ROADMAP.md` in the source).
+seventeen quests, weather, four festivals, a notice board, a Sunday market, two more regions (Windcrest Heights and Marlow Marsh), rare creatures to befriend, sprinklers, fertilizer and a flower that grows only in the rain are in; sound that follows the weather and the hour, text size, contrast and calm-motion options, and a balance pass are the last of the roadmap's eight phases.
 
 **Offline, private, yours.** No account, no internet, no multiplayer, no telemetry, and it never looks at your code or your
 editor. Your farm is saved as plain files on your computer.
@@ -30,23 +30,6 @@ editor. Your farm is saved as plain files on your computer.
 
 The day runs from 6:00 am to 2:00 am. The game saves by itself every 30 seconds, at the end of every day, and whenever you leave
 the window. It pauses when you do.
-
-## Developing
-
-```bash
-npm install
-npm run dev                 # rebuild on change + Vite hot reload (use the "Run Extension (Vite HMR)" launch config)
-npm test                    # unit tests
-npm run typecheck
-npm run build               # art + extension + webview
-npm run test:integration    # runs the real extension inside the installed VS Code
-npm run package             # builds the .vsix
-npm run assets              # regenerates the pixel art
-npm run dev:webview         # the same page in a browser tab: http://localhost:5174
-```
-
-Start with `GAME_DESIGN.md` for the architecture and data formats, and `DEVELOPMENT_ROADMAP.md` for what is done and what is
-next. (They are in the source folder, and are not part of the packaged extension.)
 
 ## Licence
 

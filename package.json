@@ -2,7 +2,7 @@
   "name": "developer-farm",
   "displayName": "Developer Farm",
   "description": "A cozy little world of your own. A single-player pixel-art farming and exploration game inside VS Code. Offline, no accounts, no tracking.",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "private": true,
   "publisher": "thesulce",
   "repository": {
