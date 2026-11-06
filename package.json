@@ -5,6 +5,14 @@
   "version": "0.8.0",
   "private": true,
   "publisher": "thesulce",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Edes2128/vscode-developer-farm.git"
+  },
+  "homepage": "https://github.com/Edes2128/vscode-developer-farm#readme",
+  "bugs": {
+    "url": "https://github.com/Edes2128/vscode-developer-farm/issues"
+  },
   "license": "MIT",
   "icon": "media/icon.png",
   "galleryBanner": {

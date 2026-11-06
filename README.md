@@ -50,6 +50,6 @@ next. (They are in the source folder, and are not part of the packaged extension
 
 ## Licence
 
-Developer Farm is released under the MIT License (see the LICENSE file) © 2026 Edes Sulce. The open-source components it bundles (PixiJS,
+Developer Farm is released under the [MIT License](LICENSE) © 2026 Edes Sulce. The open-source components it bundles (PixiJS,
 React and their dependencies, and the Pixelify Sans font) keep their own licences, reproduced in
-THIRD_PARTY_NOTICES.md.
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
